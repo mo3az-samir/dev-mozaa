@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الخدمة | Moaz Samir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(-45deg, #1e3c72, #2a5298, #6dd5fa, #ffffff);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #2c3e50;
+            --primary-color: #2980b9;
+            --accent-color: #e74c3c;
+        }
+
+        body.dark-mode {
+            --bg-gradient: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #134e5e);
+            --card-bg: rgba(20, 30, 40, 0.98);
+            --text-color: #ecf0f1;
+            --primary-color: #3498db;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .details-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(5px);
+            color: var(--accent-color);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .service-icon-large {
+            font-size: 5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+
+        .section-block {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .section-block:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .process-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .process-list li i {
+            color: var(--accent-color);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="details-card">
+        <a href="aa.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            العودة للرئيسية
+        </a>
+
+        <div style="text-align: center;">
+            <i class="fas fa-laptop-code service-icon-large"></i>
+            <h1>تطوير المواقع والتطبيقات</h1>
+        </div>
+
+        <div class="section-block">
+            <h2>نظرة عامة</h2>
+            <p>
+                نقدم خدمات تطوير مواقع ويب متكاملة، بدءًا من التصميم المبدئي ووصولاً إلى الإطلاق والصيانة. نستخدم أحدث
+                التقنيات لضمان أن يكون موقعك سريعًا، آمنًا، ومتوافقًا مع جميع الأجهزة.
+            </p>
+        </div>
+
+        <div class="section-block">
+            <h2>مراحل العمل</h2>
+            <ul class="process-list">
+                <li><i class="fas fa-check-circle"></i> تحليل المتطلبات وفهم أهداف المشروع.</li>
+                <li><i class="fas fa-paint-brush"></i> تصميم واجهة المستخدم (UI/UX) لضمان تجربة مستخدم مميزة.</li>
+                <li><i class="fas fa-code"></i> البرمجة والتطوير باستخدام أفضل الممارسات.</li>
+                <li><i class="fas fa-bug"></i> الاختبار وضمان الجودة والخلو من الأخطاء.</li>
+                <li><i class="fas fa-rocket"></i> النشر على السيرفر والدعم الفني.</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <h2>جاهز لبدء مشروعك؟</h2>
+            <a href="mailto:moazsamir61@gmail.com" class="cta-btn">اطلب الخدمة الآن</a>
+        </div>
+    </div>
+</body>
+
+</html>

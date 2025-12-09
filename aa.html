@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moaz Samir | Software Engineer</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(-45deg, #1e3c72, #2a5298, #6dd5fa, #ffffff);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-color: #2c3e50;
+            --text-secondary: #546e7a;
+            --primary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --scroll-thumb: #90a4ae;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark-mode {
+            --bg-gradient: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #134e5e);
+            --card-bg: rgba(20, 30, 40, 0.95);
+            --text-color: #ecf0f1;
+            --text-secondary: #b0bec5;
+            --primary-color: #3498db;
+            --accent-color: #e67e22;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --scroll-thumb: #546e7a;
+            --nav-bg: rgba(20, 30, 40, 0.95);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            /* Prevent body scroll, handle in card */
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px;
+            /* Enhanced perspective for large element */
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            width: 90%;
+            height: 90%;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px var(--shadow-color);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            overflow-y: auto;
+            /* Enable internal scrolling */
+            overflow-x: hidden;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            scroll-behavior: smooth;
+
+            /* Custom Scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: var(--scroll-thumb) transparent;
+
+            /* Entrance Animation */
+            opacity: 0;
+            transform: scale(0.95);
+            animation: zoomIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        .card::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .card::-webkit-scrollbar-thumb {
+            background-color: var(--scroll-thumb);
+            border-radius: 20px;
+        }
+
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .hidden-element {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .show-element {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+            background: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 10px 20px var(--shadow-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Profile Layout */
+        .main-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            flex-direction: row-reverse;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--primary-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .profile-info h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(120deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            /* Standard property */
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .profile-info h2 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin: 5px 0 0 0;
+            font-weight: 600;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--text-color);
+        }
+
+        .section-title {
+            position: relative;
+            display: block;
+            /* Full width for dividers */
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .skills {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .skills li {
+            background: rgba(9, 132, 227, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: default;
+        }
+
+        .dark-mode .skills li {
+            background: rgba(116, 185, 255, 0.1);
+        }
+
+        .skills li:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(9, 132, 227, 0.3);
+        }
+
+        .experience-box {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 20px;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .experience-item {
+            padding: 2rem;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 15px;
+            border-right: 5px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .experience-item {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-item:hover {
+            transform: translateX(-10px);
+        }
+
+        .experience-item h3 {
+            margin: 0 0 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+
+        .dark-mode .experience-box {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-box p {
+            margin: 0;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            /* Make card clickable */
+            display: block;
+            /* For anchor tag */
+            cursor: pointer;
+        }
+
+        .dark-mode .service-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 40, 0.5);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(180deg);
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .service-card:hover .service-title {
+            color: var(--primary-color);
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .project-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 40, 0.5);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 20px;
+            text-align: right;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-color);
+        }
+
+
+
+        /* Testimonials Section */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-right: 4px solid var(--primary-color);
+            font-style: italic;
+        }
+
+        .dark-mode .testimonial-card {
+            background: rgba(30, 30, 40, 0.5);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            font-style: normal;
+        }
+
+        .client-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .client-name {
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-8px) scale(1.1);
+        }
+
+        .linkedin {
+            background: #0077b5;
+        }
+
+        .whatsapp {
+            background: #25D366;
+        }
+
+        .email {
+            background: #ea4335;
+        }
+
+        .social-btn:hover.linkedin {
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.5);
+        }
+
+        .social-btn:hover.whatsapp {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .social-btn:hover.email {
+            box-shadow: 0 8px 25px rgba(234, 67, 53, 0.5);
+        }
+
+        .theme-btn {
+            margin: 20px auto 40px;
+            /* Centered with margin */
+            padding: 12px 35px;
+            cursor: pointer;
+            border: none;
+            background: var(--text-color);
+            color: var(--card-bg);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            /* Flex to center properly in parent if needed, but margin auto handles it block-wise */
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .theme-btn {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card" id="tiltCard">
+            <!-- Navigation Bar -->
+            <nav class="navbar">
+                <a href="#" class="logo">Moaz.Dev</a>
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#skills">المهارات</a></li>
+                    <li><a href="#experience">الخبرات</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#projects">المشاريع</a></li>
+                    <li><a href="#contact">تواصل معي</a></li>
+                </ul>
+            </nav>
+
+            <div class="main-content">
+                <div id="home" class="header-content">
+                    <div class="profile-container">
+                        <img src="moaz_profile.jpg" alt="Moaz Samir" class="profile-img">
+                        <div class="profile-info">
+                            <h1>معاذ سمير</h1>
+                            <h2>Software Engineer | مهندس برمجيات</h2>
+                        </div>
+                    </div>
+
+                    <p class="welcome-text">
+                        أعمل بشغف في مجال هندسة البرمجيات، وأسعى دائماً إلى تقديم حلول برمجية مبتكرة وعالية الجودة. <br>
+                        مرحبا بك في ملفي الشخصي، حيث يجتمع الإبداع مع الكود.
+                    </p>
+                </div>
+
+                <div id="skills" class="section-title">المهارات التقنية</div>
+                <ul class="skills">
+                    <li>Full Stack Development</li>
+                    <li>Python & C++</li>
+                    <li>Object-Oriented Programming (OOP)</li>
+                    <li>Database Management</li>
+                    <li>API Integration</li>
+                    <li>Cloud Services</li>
+                </ul>
+
+                <div id="experience" class="section-title">عن خبرتي</div>
+                <div class="experience-box">
+                    <div class="experience-item">
+                        <h3>تطوير الويب والتطبيقات</h3>
+                        <p>خبرة عملية في تصميم وبناء تطبيقات ويب متجاوبة وسريعة باستخدام أحدث التقنيات مثل React,
+                            Node.js, و Django. أحرص على كتابة كود نظيف وقابل للصيانة.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>حل المشكلات البرمجية</h3>
+                        <p>مهارة عالية في تحليل الأخطاء البرمجية وإيجاد حلول فعالة ومستدامة لتحسين الأداء. أتعامل مع
+                            التحديات التقنية كفرص للتعلم والابتكار.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>إدارة قواعد البيانات (DBA)</h3>
+                        <p>تصميم وإدارة قواعد البيانات المعقدة (SQL & NoSQL) لضمان سلامة البيانات وسرعة الاستعلام،
+                            والعمل على تحسين أداء الخوادم.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <h3>العمل الجماعي والقيادة</h3>
+                        <p>القدرة على العمل ضمن فرق تقنية متعددة التخصصات وإدارة المشاريع البرمجية بنجاح. أؤمن بأهمية
+                            التواصل الفعال وتبادل المعرفة لنجاح أي مشروع.</p>
+                    </div>
+                </div>
+
+                <div id="services" class="section-title hidden-element">خدماتي</div>
+                <div class="services-grid">
+                    <a href="service-details.html" class="service-card hidden-element" style="transition-delay: 100ms;">
+                        <i class="fas fa-laptop-code service-icon"></i>
+                        <div class="service-title">تطوير المواقع</div>
+                        <div class="service-desc">
+                            بناء مواقع ويب عصرية وتفاعلية باستخدام أحدث التقنيات لضمان أفضل أداء وتجربة مستخدم.
+                        </div>
+                    </a>
+                    <a href="service-details.html" class="service-card hidden-element" style="transition-delay: 200ms;">
+                        <i class="fas fa-mobile-alt service-icon"></i>
+                        <div class="service-title">تطبيقات الهاتف</div>
+                        <div class="service-desc">
+                            تصميم وتطوير تطبيقات الهواتف الذكية (iOS & Android) بواجهات جذابة وسهلة الاستخدام.
+                        </div>
+                    </a>
+                    <a href="service-details.html" class="service-card hidden-element" style="transition-delay: 300ms;">
+                        <i class="fas fa-handshake service-icon"></i>
+                        <div class="service-title">استشارات تقنية</div>
+                        <div class="service-desc">
+                            تقديم حلول واستشارات تقنية للشركات والأفراد لتحسين البنية التحتية الرقمية.
+                        </div>
+                    </a>
+                </div>
+
+                <div id="projects" class="section-title">مشاريعي</div>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <img src="project_ecommerce.jpg" alt="E-Commerce Project" class="project-img">
+                        <div class="project-content">
+                            <div class="project-title">منصة تجارة إلكترونية</div>
+                            <div class="project-desc">
+                                متجر إلكتروني متكامل يدعم الدفع الإلكتروني، إدارة المخزون، ولوحة تحكم متقدمة. مبني
+                                باستخدام
+                                React و Node.js.
+                            </div>
+                            <a href="project-details.html" class="project-link">عرض المشروع</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <img src="project_ai_chat.jpg" alt="AI Chatbot" class="project-img">
+                        <div class="project-content">
+                            <div class="project-title">مساعد ذكي (AI)</div>
+                            <div class="project-desc">
+                                تطبيق دردشة ذكي يستخدم تقنيات الذكاء الاصطناعي للإجابة على الاستفسارات بشكل فوري ودقيق.
+                                تكامل مع خدمات OpenAI.
+                            </div>
+                            <a href="project-details.html" class="project-link">عرض المشروع</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <img src="project_task_app.jpg" alt="Task Management" class="project-img">
+                        <div class="project-content">
+                            <div class="project-title">تطبيق إدارة المهام</div>
+                            <div class="project-desc">
+                                تطبيق للهواتف الذكية يساعد الفرق على تنظيم المهام ومتابعة الإنتاجية بتصميم عصري وجذاب.
+                            </div>
+                            <a href="project-details.html" class="project-link">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">آراء العملاء</div>
+                <div class="testimonials">
+                    <div class="testimonial-card">
+                        <p>"تعامل راقي جداً واحترافية في العمل. النتيجة كانت أفضل مما توقعت!"</p>
+                        <div class="client-info">
+                            <div class="client-img" style="background-color: #3498db;"></div>
+                            <div class="client-name">أحمد علي<br><small>مدير شركة TechStart</small></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"التزام تام بالمواعيد وجودة في الكود. أرشح التعامل معه بشدة."</p>
+                        <div class="client-info">
+                            <div class="client-img" style="background-color: #e74c3c;"></div>
+                            <div class="client-name">سارة محمد<br><small>مصممة جرافيك</small></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"مبدع في إيجاد الحلول التقنية المعقدة وتبسيطها."</p>
+                        <div class="client-info">
+                            <div class="client-img" style="background-color: #2ecc71;"></div>
+                            <div class="client-name">خالد يوسف<br><small>رائد أعمال</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="contact" class="contact-section">
+                    <a href="https://www.linkedin.com/in/moaz-samir-9994742a3/" target="_blank"
+                        class="social-btn linkedin" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:moazsamir61@gmail.com" class="social-btn email" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://wa.me/201126874664" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+
+                <button onclick="toggleTheme()" class="theme-btn">
+                    <i class="fas fa-adjust"></i>
+                    <span>تغيير المظهر</span>
+                </button>
+            </div> <!-- End Main Content -->
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // 3D Tilt Effect - Adjusted for larger card
+        // Only tilt slightly as it's a large surface now
+        const card = document.getElementById('tiltCard');
+        const container = document.querySelector('.container');
+
+        container.addEventListener('mousemove', (e) => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+
+            // Normalize mouse position
+            const x = (e.clientX - w / 2) / (w / 2);
+            const y = (e.clientY - h / 2) / (h / 2);
+
+            // Subtle tilt (max 3 degrees) to not disturb scrolling
+            const tiltX = y * 2;
+            const tiltY = -x * 2;
+
+            // Apply tilt only if we are not interacting with inner elements ideally, 
+            // but for simple visual effect, a very small tilt is okay.
+            card.style.transform = `scale(1) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            card.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-element');
+                }
+            });
+        }, observerOptions);
+
+        const hiddenElements = document.querySelectorAll('.hidden-element');
+        // Add specific classes to other major sections for animation
+        document.querySelectorAll('.section-title, .experience-item, .skills li, .project-card, .testimonial-card').forEach(el => {
+            el.classList.add('hidden-element');
+            observer.observe(el);
+        });
+
+        hiddenElements.forEach(el => observer.observe(el));
+
+    </script>
+
+</body>
+
+</html>
