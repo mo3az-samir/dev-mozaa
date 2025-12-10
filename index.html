@@ -719,6 +719,231 @@
         .skills li i {
             font-size: 1.2rem;
         }
+
+        /* Chatbot Styles */
+        .chatbot-toggler {
+            position: fixed;
+            bottom: 30px;
+            right: 35px;
+            border: none;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            background: var(--primary-color);
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .chatbot-toggler span {
+            color: #fff;
+            position: absolute;
+            font-size: 1.5rem;
+        }
+
+        .chatbot-toggler span:last-child,
+        .show-chatbot .chatbot-toggler span:first-child {
+            opacity: 0;
+        }
+
+        .show-chatbot .chatbot-toggler span:last-child {
+            opacity: 1;
+        }
+
+        .chatbot {
+            position: fixed;
+            right: 35px;
+            bottom: 90px;
+            width: 350px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.5);
+            transform-origin: bottom right;
+            box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+                0 32px 64px -48px rgba(0, 0, 0, 0.5);
+            transition: all 0.1s ease;
+            z-index: 9999;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .show-chatbot .chatbot {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .chatbot header {
+            padding: 16px 0;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            background: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatbot header h2 {
+            font-size: 1.4rem;
+            margin: 0;
+            color: #fff;
+        }
+
+        .chatbot header span {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+            transform: translateY(-50%);
+        }
+
+        .chatbot .chatbox {
+            overflow-y: auto;
+            height: 400px;
+            padding: 30px 20px 100px;
+        }
+
+        .chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+            background: #fff;
+            border-radius: 25px;
+        }
+
+        .chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 25px;
+        }
+
+        .chatbox .chat {
+            display: flex;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .chatbox .outgoing {
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .chatbox .incoming span {
+            width: 32px;
+            height: 32px;
+            color: #fff;
+            cursor: default;
+            text-align: center;
+            line-height: 32px;
+            align-self: flex-end;
+            background: var(--primary-color);
+            border-radius: 4px;
+            margin: 0 10px 7px 0;
+        }
+
+        .chatbox .chat p {
+            white-space: pre-wrap;
+            padding: 12px 16px;
+            border-radius: 10px 10px 0 10px;
+            max-width: 75%;
+            color: #fff;
+            font-size: 0.95rem;
+            background: var(--primary-color);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .chatbox .incoming p {
+            border-radius: 10px 10px 10px 0;
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.05);
+            /* Light gray for incoming */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .chatbox .incoming p {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chatbot .chat-input {
+            display: flex;
+            gap: 5px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Allow buttons to wrap */
+        }
+
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .option-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .option-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        @media (max-width: 490px) {
+            .chatbot-toggler {
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .chatbot {
+                right: 0;
+                bottom: 0;
+                height: 100%;
+                border-radius: 0;
+                width: 100%;
+            }
+
+            .chatbot .chatbox {
+                height: 90%;
+                padding: 25px 15px 100px;
+            }
+
+            .chatbot .chat-input {
+                padding: 15px;
+            }
+
+            .chatbot header span {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -938,6 +1163,29 @@
         </div>
     </div>
 
+    <!-- Chatbot HTML -->
+    <button class="chatbot-toggler">
+        <span class="material-symbols-rounded"><i class="fas fa-comment"></i></span>
+        <span class="material-symbols-outlined"><i class="fas fa-times"></i></span>
+    </button>
+    <div class="chatbot">
+        <header>
+            <h2>المساعد الذكي</h2>
+            <span class="close-btn material-symbols-outlined"><i class="fas fa-times"></i></span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined"><i class="fas fa-robot"></i></span>
+                <p>مرحباً بك 👋<br>كيف يمكنني مساعدتك اليوم؟</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <div class="chat-options" id="chatOptions">
+                <!-- Options will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         function toggleTheme() {
             document.body.classList.toggle("dark-mode");
@@ -1005,6 +1253,118 @@
 
         hiddenElements.forEach(el => observer.observe(el));
 
+        // --- Chatbot Logic ---
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbot = document.querySelector(".chatbot");
+        const chatbox = document.querySelector(".chatbox");
+        const chatOptionsContainer = document.getElementById("chatOptions");
+
+        // Predefined Q&A Data
+        const qaData = {
+            start: {
+                options: [
+                    { text: "ما هي خدماتك؟", next: "services" },
+                    { text: "كيف أتواصل معك؟", next: "contact" },
+                    { text: "عرض المشاريع", next: "projects" },
+                    { text: "من هو معاذ؟", next: "about" }
+                ]
+            },
+            services: {
+                answer: "أقدم خدمات متنوعة تشمل:\n1. تطوير مواقع الويب (Web Development)\n2. تطبيقات الهواتف الذكية (Mobile Apps)\n3. استشارات تقنية وتحسين البنية التحتية.",
+                options: [
+                    { text: "طلب خدمة", next: "contact" },
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            },
+            contact: {
+                answer: "يمكنك التواصل معي عبر:\n- LinkedIn\n- WhatsApp\n- البريد الإلكتروني\nراجع قسم 'تواصل معي' في أسفل الموقع.",
+                options: [
+                    { text: "شكراً", next: "thanks" },
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            },
+            projects: {
+                answer: "يمكنك تصفح مشاريعي في قسم 'المشاريع' في الموقع، وتشمل منصات تجارة إلكترونية، وتطبيقات ذكاء اصطناعي.",
+                options: [
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            },
+            about: {
+                answer: "أنا معاذ سمير، مهندس برمجيات متخصص في الشبكات والحوسبة السحابية (Azure) وتطوير الويب الشامل (Full Stack).",
+                options: [
+                    { text: "مهاراتي", next: "skills" },
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            },
+            skills: {
+                answer: "أتقن:\n- Python, C++, JS\n- Networking (CCNA)\n- Cloud (Azure)\n- حل المشكلات والخوارزميات.",
+                options: [
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            },
+            thanks: {
+                answer: "العفو! أنا هنا دائماً للمساعدة. بالتوفيق!",
+                options: [
+                    { text: "العودة للقائمة", next: "start" }
+                ]
+            }
+        };
+
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined"><i class="fas fa-robot"></i></span><p></p>`;
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").innerText = message;
+            return chatLi; // return chat <li> element
+        }
+
+        const generateResponse = (optionKey) => {
+            const data = qaData[optionKey];
+            if (!data) return;
+
+            // 1. Remove old options
+            chatOptionsContainer.innerHTML = '';
+
+            // 2. Add Bot Response (if any)
+            if (data.answer) {
+                setTimeout(() => {
+                    const incomingChatLi = createChatLi(data.answer, "incoming");
+                    chatbox.appendChild(incomingChatLi);
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                }, 600);
+            }
+
+            // 3. Add New Options
+            setTimeout(() => {
+                const options = data.options || [];
+                options.forEach(opt => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("option-btn");
+                    btn.innerText = opt.text;
+                    btn.onclick = () => handleOptionClick(opt.text, opt.next);
+                    chatOptionsContainer.appendChild(btn);
+                });
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }, data.answer ? 1200 : 600); // Delay options slightly after answer
+        }
+
+        const handleOptionClick = (userText, nextKey) => {
+            // Add user message
+            const outgoingChatLi = createChatLi(userText, "outgoing");
+            chatbox.appendChild(outgoingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            // Generate bot response
+            generateResponse(nextKey);
+        }
+
+        // Initialize Chat Options
+        generateResponse('start');
+
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+        closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
     </script>
 
 </body>
