@@ -602,6 +602,24 @@
             background: rgba(30, 30, 40, 0.5);
         }
 
+        .testimonial-card::before {
+            content: '\f10e';
+            /* FontAwesome Quote */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
         .client-info {
             display: flex;
             align-items: center;
@@ -958,6 +976,325 @@
                 display: block;
             }
         }
+
+        /* Rotator Section Styles */
+        .rotator-container {
+            margin: 4rem auto;
+            max-width: 800px;
+            height: 180px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--glass-border);
+        }
+
+        .dark-mode .rotator-container {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .rotator-item {
+            position: absolute;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rotator-item.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .rotator-item.exit {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.9);
+        }
+
+        .rotator-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .rotator-item h3 {
+            font-size: 1.4rem;
+            margin: 0 0 10px;
+            color: var(--primary-color);
+        }
+
+        .rotator-item p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- 1. Preloader Styles --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--nav-bg);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .dark-mode .loader {
+            border-color: rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-color);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+        /* --- 3. Experience Grid Styles (New) --- */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .experience-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: right;
+            /* RTL */
+        }
+
+        .dark-mode .experience-card {
+            background: rgba(30, 30, 40, 0.5);
+            /* Match other dark mode cards */
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .experience-date {
+            display: inline-block;
+            background: rgba(41, 128, 185, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            width: fit-content;
+        }
+
+        .experience-card h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .experience-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .experience-icon {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            /* On the left side because it's RTL text */
+            font-size: 2rem;
+            color: var(--accent-color);
+            opacity: 0.2;
+        }
+
+        /* --- 4. CTA Section Styles --- */
+        .cta-section {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: #fff;
+            margin: 4rem 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background: #fff;
+            color: var(--primary-color);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- 5. Professional Footer Styles --- */
+        .main-footer {
+            background: var(--nav-bg);
+            border-top: 1px solid var(--glass-border);
+            padding: 60px 0 20px;
+            margin-top: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: right;
+        }
+
+        .footer-col h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: flex-end;
+            /* Right align for Arabic RTL */
+        }
+
+        .footer-socials a {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.05);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Main structure adjustment for Flex Body to stick footer if needed, 
+           but here we are inside .container > .card. 
+           So footer will be inside the card at bottom. */
     </style>
 </head>
 
@@ -1029,31 +1366,61 @@
                     <li><i class="fab fa-css3-alt"></i> CSS3</li>
                 </ul>
 
-                <div id="experience" class="section-title">عن خبرتي</div>
-                <div class="experience-box">
-                    <div class="experience-item">
-                        <h3>تطوير الويب والتطبيقات</h3>
-                        <p>خبرة عملية في تصميم وبناء تطبيقات ويب متجاوبة وسريعة باستخدام أحدث التقنيات مثل React,
-                            Node.js, و Django. أحرص على كتابة كود نظيف وقابل للصيانة.</p>
+                <!-- New Rotating Section -->
+                <div class="rotator-container hidden-element">
+                    <div class="rotator-item active">
+                        <div class="rotator-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>أداء عالي وسرعة</h3>
+                        <p>نضمن لك مواقع وتطبيقات تعمل بأقصى سرعة وكفاءة عالية.</p>
+                    </div>
+                    <div class="rotator-item">
+                        <div class="rotator-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>حماية وأمان</h3>
+                        <p>أولوية قصوى لتأمين بياناتك وحماية مشروعك من الثغرات.</p>
+                    </div>
+                    <div class="rotator-item">
+                        <div class="rotator-icon"><i class="fas fa-clock"></i></div>
+                        <h3>تسليم في الموعد</h3>
+                        <p>نحترم وقتك ونلتزم بتسليم المشاريع في الجداول الزمنية المحددة.</p>
+                    </div>
+                    <div class="rotator-item">
+                        <div class="rotator-icon"><i class="fas fa-headset"></i></div>
+                        <h3>دعم فني متواصل</h3>
+                        <p>فريقنا بجانبك دائماً لحل أي مشكلة تقنية قد تواجهك.</p>
+                    </div>
+                </div>
+
+                <div id="experience" class="section-title">خبراتي العملية</div>
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <span class="experience-date">2023 - الآن</span>
+                        <i class="fas fa-laptop-code experience-icon"></i>
+                        <h3>مطور ويب شامل (Freelance)</h3>
+                        <p>بناء مواقع وتطبيقات ويب متجاوبة باستخدام React و Django، مع التركيز على أداء وسرعة التطبيقات
+                            وتجربة المستخدم.</p>
                     </div>
 
-                    <div class="experience-item">
-                        <h3>حل المشكلات البرمجية</h3>
-                        <p>مهارة عالية في تحليل الأخطاء البرمجية وإيجاد حلول فعالة ومستدامة لتحسين الأداء. أتعامل مع
-                            التحديات التقنية كفرص للتعلم والابتكار.</p>
+                    <div class="experience-card">
+                        <span class="experience-date">2022 - 2023</span>
+                        <i class="fas fa-network-wired experience-icon"></i>
+                        <h3>مهندس شبكات (تدريب)</h3>
+                        <p>تصميم وإدارة الشبكات المحلية (LAN) والعمل على أجهزة سيسكو (Switching & Routing) وحل مشاكل
+                            الاتصال.</p>
                     </div>
 
-                    <div class="experience-item">
-                        <h3>إدارة قواعد البيانات (DBA)</h3>
-                        <p>تصميم وإدارة قواعد البيانات المعقدة (SQL & NoSQL) لضمان سلامة البيانات وسرعة الاستعلام،
-                            والعمل على تحسين أداء الخوادم.</p>
+                    <div class="experience-card">
+                        <span class="experience-date">2021 - 2022</span>
+                        <i class="fab fa-microsoft experience-icon"></i>
+                        <h3>متدرب Cloud Azure</h3>
+                        <p>دراسة الحوسبة السحابية وإدارة الخوادم الافتراضية، ونشر التطبيقات، والحصول على شهادة أساسيات
+                            Azure.</p>
                     </div>
 
-                    <div class="experience-item">
-                        <h3>العمل الجماعي والقيادة</h3>
-                        <p>القدرة على العمل ضمن فرق تقنية متعددة التخصصات وإدارة المشاريع البرمجية بنجاح. أؤمن
-                            بأهمية
-                            التواصل الفعال وتبادل المعرفة لنجاح أي مشروع.</p>
+                    <div class="experience-card">
+                        <span class="experience-date">2020 - 2021</span>
+                        <i class="fab fa-python experience-icon"></i>
+                        <h3>مطور Python</h3>
+                        <p>كتابة سكربتات أتمتة لمعالجة البيانات وتطوير أدوات مساعدة صغيرة لتسريع سير العمل اليومي.</p>
                     </div>
                 </div>
 
@@ -1124,6 +1491,34 @@
                             <a href="project-details.html" class="project-link">عرض المشروع</a>
                         </div>
                     </div>
+
+                    <!-- New Project 4: Smart Home -->
+                    <div class="project-card">
+                        <!-- Reusing existing image as placeholder -->
+                        <img src="project_task_app.jpg" alt="Smart Home System" class="project-img">
+                        <div class="project-content">
+                            <div class="project-title">نظام المنزل الذكي</div>
+                            <div class="project-desc">
+                                لوحة تحكم متطورة لإدارة الأجهزة المنزلية الذكية (IoT) مع تحليلات استهلاك الطاقة وتحكم
+                                صوتي.
+                            </div>
+                            <a href="project-details.html" class="project-link">عرض المشروع</a>
+                        </div>
+                    </div>
+
+                    <!-- New Project 5: LMS -->
+                    <div class="project-card">
+                        <!-- Reusing existing image as placeholder -->
+                        <img src="project_ecommerce.jpg" alt="LMS Platform" class="project-img">
+                        <div class="project-content">
+                            <div class="project-title">منصة تعليمية (LMS)</div>
+                            <div class="project-desc">
+                                نظام إدارة تعلم شامل للطلاب والمعلمين، يدعم الفصول الافتراضية والاختبارات الآلية.
+                            </div>
+                            <a href="project-details.html" class="project-link">عرض المشروع</a>
+                        </div>
+                    </div>
+
                     <div class="project-card">
                         <img src="project_ai_chat.jpg" alt="n8n Automation" class="project-img">
                         <div class="project-content">
@@ -1179,9 +1574,67 @@
                     </a>
                 </div>
 
-            </div> <!-- End Main Content -->
-        </div>
+            </div> <!-- End Contact Section -->
+
+            <!-- CTA Section -->
+            <div class="cta-section hidden-element">
+                <h2>هل لديك فكرة مشروع؟</h2>
+                <p>دعنا نحول فكرتك إلى واقع تقني مبهر. تواصل معي الآن لبدء التنفيذ!</p>
+                <a href="#contact" class="cta-btn">ابدأ الآن <i class="fas fa-arrow-left"></i></a>
+            </div>
+
+            <!-- Professional Footer -->
+            <footer class="main-footer">
+                <div class="footer-content">
+                    <div class="footer-col">
+                        <h3>Moaz.Dev</h3>
+                        <p class="footer-desc">
+                            مهندس برمجيات متخصص في تقديم حلول تقنية متكاملة. شغفي هو بناء أنظمة قوية وتصميمات جذابة
+                            تساعد في نمو أعمالك.
+                        </p>
+                        <div class="footer-socials">
+                            <a href="https://www.linkedin.com/in/moaz-samir-9994742a3/" target="_blank"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/mo3az-samir" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://wa.me/201126874664" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:moazsamir61@gmail.com"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h3>روابط سريعة</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                            <li><a href="#projects"><i class="fas fa-chevron-left"></i> المشاريع</a></li>
+                            <li><a href="#services"><i class="fas fa-chevron-left"></i> الخدمات</a></li>
+                            <li><a href="#experience"><i class="fas fa-chevron-left"></i> الخبرات</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h3>تواصل معي</h3>
+                        <ul class="footer-links">
+                            <li><a href="mailto:moazsamir61@gmail.com"><i class="fas fa-envelope"></i>
+                                    moazsamir61@gmail.com</a></li>
+                            <li><a href="#contact"><i class="fas fa-phone"></i> +20 112 687 4664</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Moaz Samir. جميع الحقوق محفوظة.</p>
+                </div>
+            </footer>
+
+        </div> <!-- End Main Content (Card) -->
+    </div> <!-- End Container -->
+
+    <!-- Preloader HTML -->
+    <div id="preloader">
+        <div class="loader"></div>
     </div>
+
+
 
     <!-- Chatbot HTML -->
     <button class="chatbot-toggler">
@@ -1385,6 +1838,61 @@
 
         chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
         closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+
+        // --- Rotator Logic ---
+        const rotatorItems = document.querySelectorAll('.rotator-item');
+        let currentRotatorIndex = 0;
+
+        function rotateContent() {
+            if (rotatorItems.length === 0) return;
+
+            // Current item (to be removed)
+            const prevItem = rotatorItems[currentRotatorIndex];
+
+            // Update index to next
+            currentRotatorIndex = (currentRotatorIndex + 1) % rotatorItems.length;
+            const nextItem = rotatorItems[currentRotatorIndex];
+
+            // Transition: Old -> Exit, New -> Active
+            prevItem.classList.remove('active');
+            prevItem.classList.add('exit');
+
+            nextItem.classList.add('active');
+
+            // Cleanup exit class after animation
+            setTimeout(() => {
+                prevItem.classList.remove('exit');
+            }, 500);
+        }
+
+        setInterval(rotateContent, 3000); // 3 seconds interval
+
+        // --- 1. Preloader Logic ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+        });
+
+
+
+        // --- 3. Animation Logic (Updated for Grid) ---
+        const expObserverOptions = {
+            threshold: 0.1
+        };
+
+        const expObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-element');
+                }
+            });
+        }, expObserverOptions);
+
+        document.querySelectorAll('.experience-card').forEach(item => {
+            item.classList.add('hidden-element');
+            expObserver.observe(item);
+        });
     </script>
 
 
